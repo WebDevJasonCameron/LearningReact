@@ -13,7 +13,7 @@ function Footer() {
   }
 
   return (
-    <footer>{new Date().toLocaleTimeString()}{status}</footer>
+    <footer className="footer">{new Date().toLocaleTimeString()}{status}</footer>
   );
 }
 

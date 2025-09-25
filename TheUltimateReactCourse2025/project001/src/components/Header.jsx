@@ -1,7 +1,7 @@
 import '../App.css'
 function Header() {
   return (
-    <div>
+    <div className="header">
       <h1>Fast React Pizza Co</h1>
     </div>
   );
