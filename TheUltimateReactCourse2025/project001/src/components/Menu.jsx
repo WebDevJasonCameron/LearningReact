@@ -47,11 +47,14 @@ const pizzaData = [
 ];
 
 function Menu() {
+  const pizzas = pizzaData;
+  const numPizzas = pizzas.length;
+
   return (
     <main className="menu">
       <h2>Our Menu</h2>
 
-      {numPizzas > 0 (
+      {numPizzas > 0 ? (
         <>
           <p>
             Authentic Italian cuisine. 6 creative dishes to choose from . All
@@ -63,14 +66,11 @@ function Menu() {
               <Pizza pizzaObj={pizza} key={pizza.name} />
             ))}
           </ul>
-
         </>
-      )}
+      ) : (
+        <p>We're still working on our menu.  Please come back later :)</p>
+        )}
 
-      <Pizza />
-      <Pizza />
-      <Pizza />
-      <Pizza />
     </main>
   );
 }

@@ -1,16 +1,18 @@
 import '../App.css'
 
-function Pizza() {
-  const pizzas = pizzaData;
-  const numPizzas = pizzas.length;
+function Pizza(props) {
 
   return (
-    <div>
-      <img src="pizzas/focaccia.jpg" alt="Focaccia" />
-      <h2>Focaccia</h2>
-      <p>Bread with italian olive oil and rosemary</p>
-      <p>Price: $6</p>
-    </div>
+    <li className={`pizza ${props.pizzaObj.soldOut ? "sold-out" : ""}`}>
+      <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
+      <div>
+        <h3>{props.pizzaObj.name}</h3>
+        <p>{props.pizzaObj.ingredients}</p>
+
+        <span>{props.pizzaObj.soldOut ? "SOLD OUT" : props.pizzaObj.price}</span>
+      </div>
+    </li>
+
   );
 }
 
