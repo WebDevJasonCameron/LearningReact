@@ -1,19 +1,23 @@
 import '../App.css'
-function Footer() {
+import Order from "./Order.jsx";
 
+function Footer() {
   const hour = new Date().getHours();
   const openHour = 12;
   const closeHour = 22;
-  var status = "";
-
-  if (hour < openHour || hour > closeHour) {
-    status = " ->  We're currently closed!";
-  } else {
-    status = " ->  We're currently open!";
-  }
+  const isOpen = hour >= openHour && hour <= closeHour;
+  console.log(isOpen);
 
   return (
-    <footer className="footer">{new Date().toLocaleTimeString()}{status}</footer>
+    <footer className="footer">
+      {isOpen ? (
+        <Order closeHour={closeHour} openHour={openHour} />
+      ) : (
+        <p>
+          We're happy to welcome you between {openHour}:00 and {closeHour}:00.
+        </p>
+      )}
+    </footer>
   );
 }
 

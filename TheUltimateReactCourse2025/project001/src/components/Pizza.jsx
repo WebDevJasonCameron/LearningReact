@@ -2,6 +2,8 @@ import '../App.css'
 
 function Pizza(props) {
 
+  if (props.pizzaObj.soldOut) return null;
+
   return (
     <li className={`pizza ${props.pizzaObj.soldOut ? "sold-out" : ""}`}>
       <img src={props.pizzaObj.photoName} alt={props.pizzaObj.name} />
