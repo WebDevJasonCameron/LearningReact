@@ -1,11 +1,35 @@
+import {useState} from "react";
 
-function App() {
+export default function App() {
 
   return (
-    <>
-      <h1>Hello World</h1>
-    </>
+    <div className="App">
+      <Counter />
+    </div>
   )
 }
 
-export default App
+function Counter () {
+  const [count, setCount] = useState(0);
+
+  const date = new Date();
+  date.setDate(date.getDate() + count);
+
+  return (
+    <div>
+      <div>
+        <button onClick={() => setCount(c => c - 1 )}> - </button>
+        <span>Count: {count}</span>
+        <button onClick={() => setCount(c => c + 1 )}> + </button>
+      </div>
+
+      <p>
+        <span>{count === 0 ? "Today is " : count > 0 ? `${count} days from today is ` : `${count} days ago was ` }</span>
+        <span>{date.toDateString()}</span>
+      </p>
+
+    </div>
+  )
+}
+
+
