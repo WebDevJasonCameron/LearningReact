@@ -19,15 +19,22 @@ function Counter () {
   return (
     <div>
       <div>
-        <input type="range" min={-10} max={10} />
-        <button onClick={() => setStep(c => c - 1 )}> - </button>
+          <input
+            type="range"
+            min={-10}
+            max={10}
+            onChange={e=>setStep(e.target.valueAsNumber)}
+          />
         <span>Step: {step}</span>
-        <button onClick={() => setStep(c => c + 1 )}> + </button>
       </div>
 
       <div>
         <button onClick={() => setCount(c => c - step )}> - </button>
-        <span>Count: {count}</span>
+        <input
+          type="text"
+          value={count}
+          onChange={e => setCount(e.target.valueAsNumber)}
+        />
         <button onClick={() => setCount(c => c + step )}> + </button>
       </div>
 
