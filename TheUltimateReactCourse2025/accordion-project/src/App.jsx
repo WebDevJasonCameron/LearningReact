@@ -34,4 +34,8 @@ function Accordion() {
   )
 }
 
+function AccordionItem({num, title, text}) {
+
+}
+
 export default App
