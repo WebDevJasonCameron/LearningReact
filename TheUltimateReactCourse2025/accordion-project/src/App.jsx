@@ -41,14 +41,26 @@ function Accordion({data}) {
 }
 
 function AccordionItem({ num, title, text }) {
+  const [isOpen, setIsOpen] = React.useState(false)
+
+  function handleToggle() {
+    setIsOpen(!isOpen)
+  }
+
   return(
-    <div className="item">
+    <div className={`item ${isOpen ? 'open' : ''}`}
+      onClick={handleToggle} >
       <p className="number">{num < 9 ? `0${num + 1}` : num + 1}</p>
       <p className="title">{title}</p>
-      <p className="icon">-</p>
-      <div className="content-box">
+      <p className="icon"
+        onClick={() => setIsOpen(!isOpen)}>
+        {
+          isOpen ? <span>&#10005;</span> : <span>&#10095;</span>
+        }
+      </p>
+      { isOpen && <div className="content-box">
         {text}
-      </div>
+      </div> }
     </div>
   )
 }
