@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import './App.css'
 
 function App() {
@@ -16,8 +16,7 @@ function App() {
       title: " Do you ship to countries outside the EU?",
       text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit."
     }
-
-  ]
+  ];
 
   return (
     <div>
@@ -26,25 +25,35 @@ function App() {
   )
 }
 
-function Accordion({data}) {
+function Accordion({ data }) {
+  const [curOpen, setIsCurOpen] = useState(null)
+
   return (
     <div className="accordion">
       { data.map((el, i) =>
         <AccordionItem
+          curOpen={curOpen}
+          onOpen={setIsCurOpen}
           title={el.title}
-          text={el.text}
           key={i}
-          num={i} />)
-      }
+          num={i}
+        >
+          {el.text}
+        </AccordionItem>
+      )}
     </div>
   )
 }
 
-function AccordionItem({ num, title, text }) {
-  const [isOpen, setIsOpen] = React.useState(false)
+function AccordionItem({ num, title, curOpen, onOpen, children: text }) {
+  const isOpen = num === curOpen;
 
   function handleToggle() {
-    setIsOpen(!isOpen)
+    if (isOpen === num) {
+      return onOpen(null);
+    } else {
+      return onOpen(num);
+    }
   }
 
   return(
@@ -52,8 +61,7 @@ function AccordionItem({ num, title, text }) {
       onClick={handleToggle} >
       <p className="number">{num < 9 ? `0${num + 1}` : num + 1}</p>
       <p className="title">{title}</p>
-      <p className="icon"
-        onClick={() => setIsOpen(!isOpen)}>
+      <p className="icon" >
         {
           isOpen ? <span>&#10005;</span> : <span>&#10095;</span>
         }
