@@ -1,18 +1,22 @@
+
 export default function Form() {
 
-  function handleCalculation(cost, yourValue, friendValue) {
-    return (cost * ((yourValue + friendValue) / 100))
+  function handleTotalTipCalculation(cost, yourValue, friendValue) {
+    const yourTip = (cost * (yourValue / 100));
+    const friendTip = (cost * (friendValue / 100));
+    return yourTip + friendTip;
+  }
+
+  function handleTotal (cost, tipTotal) {
+    return cost + tipTotal;
   }
 
   function handleSubmit(event) {
     event.preventDefault()
-    let cost = document.querySelector('input').value
-    let yourValue = document.querySelector('select[name="your-value"]').value
-    let friendValue = document.querySelector('select[name="friend-value"]').value
-
-    let total = handleCalculation(cost, yourValue, friendValue)
-
-    console.log(total)
+    let costInput = document.querySelector('input').value
+    let yourValueInput = document.querySelector('select[name="your-value"]').value
+    let friendValueInput = document.querySelector('select[name="friend-value"]').value
+    return console.log(handleTotalTipCalculation(costInput, yourValueInput, friendValueInput))
   }
 
   return (
@@ -45,8 +49,12 @@ export default function Form() {
 
       <div>
         <h3>
-          You Pay $00
+          You Pay ${'total'} (${'cost'} + ${'totalTip'} tip)
         </h3>
+      </div>
+
+      <div>
+        <button type="reset">Reset</button>
       </div>
 
     </form>
