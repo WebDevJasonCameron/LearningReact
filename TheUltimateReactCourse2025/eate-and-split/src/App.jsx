@@ -1,3 +1,5 @@
+import FriendsList from "./components/FriendsList.jsx";
+
 const initialFriends = [
   {
     id: 118836,
@@ -23,8 +25,10 @@ const initialFriends = [
 function App() {
 
   return (
-    <div>
-
+    <div className="app">
+      <div className="sidebar">
+        <FriendsList friendsList={initialFriends} />
+      </div>
     </div>
   )
 }
