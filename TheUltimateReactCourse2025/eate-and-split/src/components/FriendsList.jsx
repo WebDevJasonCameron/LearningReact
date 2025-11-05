@@ -1,9 +1,10 @@
+import Friend from "./Friend.jsx";
+
 export default function FriendsList ({ initialFriends }) {
-  const friends = initialFriends;
 
   return (
     <ul>
-      {friends.map((friend) => (
+      {initialFriends.map((friend) => (
         <Friend friend={friend} key={friend.id} />
       ))}
 
@@ -11,11 +12,3 @@ export default function FriendsList ({ initialFriends }) {
   )
 }
 
-function Friend({ friend }) {
-  return (
-    <li>
-      <img src={friend.img} alt={friend.name} />
-      <h3>{friend.name}</h3>
-    </li>
-  )
-}
