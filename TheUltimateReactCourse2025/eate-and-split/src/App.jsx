@@ -27,7 +27,7 @@ function App() {
   return (
     <div className="app">
       <div className="sidebar">
-        <FriendsList friendsList={initialFriends} />
+        <FriendsList initialFriends={initialFriends} />
       </div>
     </div>
   )

@@ -1,19 +1,21 @@
-export default function FriendsList ({ friendsList }) {
-  const friends = friendsList;
+export default function FriendsList ({ initialFriends }) {
+  const friends = initialFriends;
 
-    return (
-      <ul>
-        {friend.map((friend) => (
-          <Friend friend={friend} key={friend.id} />
-        ))}
-      </ul>
-    );
+  return (
+    <ul>
+      {friends.map((friend) => (
+        <Friend friend={friend} key={friend.id} />
+      ))}
+
+    </ul>
+  )
 }
 
-function Friend({ Friend }) {
+function Friend({ friend }) {
   return (
     <li>
-      <img src={friend.image} alt="friend" />
+      <img src={friend.img} alt={friend.name} />
+      <h3>{friend.name}</h3>
     </li>
   )
 }
