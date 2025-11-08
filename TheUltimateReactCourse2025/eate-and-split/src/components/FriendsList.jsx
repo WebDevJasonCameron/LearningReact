@@ -1,10 +1,12 @@
 import Friend from "./Friend.jsx";
 
-export default function FriendsList ({ initialFriends }) {
+export default function FriendsList ({ friends }) {
+
+  console.log(friends);
 
   return (
     <ul>
-      {initialFriends.map((friend) => (
+      {friends.map((friend) => (
         <Friend friend={friend} key={friend.id} />
       ))}
 
