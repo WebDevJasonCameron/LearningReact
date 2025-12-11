@@ -1,8 +1,8 @@
 import {useState} from "react";
-import {tempMovieData} from "../assets/TempMovieData.jsx";
+import {tempWatchedData} from "../assets/TempWatchData.jsx";
 
 export default function WatchedBox() {
-  const [watched, setWatched] = useState(tempMovieData);
+  const [watched, setWatched] = useState(tempWatchedData);
   const [isOpen2, setIsOpen2] = useState(true);
 
   const average = (arr) =>
