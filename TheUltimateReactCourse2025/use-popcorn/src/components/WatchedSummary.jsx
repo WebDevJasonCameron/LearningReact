@@ -16,7 +16,7 @@ export default function WatchedSummary({ watched }) {
         </p>
         <p>
           <span>⭐️</span>
-          <span>{avgImdbRating}</span>
+          <span>{avgImdbRating}</span>k
         </p>
         <p>
           <span>🌟</span>
