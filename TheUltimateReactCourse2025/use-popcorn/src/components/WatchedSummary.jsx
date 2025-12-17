@@ -1,10 +1,12 @@
 export default function WatchedSummary({ watched }) {
+  const average = (arr) =>
+    arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+
   const avgImdbRating = average(watched.map((movie) => movie.imdbRating));
   const avgUserRating = average(watched.map((movie) => movie.userRating));
   const avgRuntime = average(watched.map((movie) => movie.runtime));
 
-  const average = (arr) =>
-    arr.reduce((acc, cur, i, arr) => acc + cur / arr.length, 0);
+
 
   return (
     <div className="summary">
@@ -16,7 +18,7 @@ export default function WatchedSummary({ watched }) {
         </p>
         <p>
           <span>⭐️</span>
-          <span>{avgImdbRating}</span>k
+          <span>{avgImdbRating}</span>
         </p>
         <p>
           <span>🌟</span>
