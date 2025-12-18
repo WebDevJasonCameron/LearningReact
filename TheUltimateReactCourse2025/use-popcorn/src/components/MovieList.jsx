@@ -1,10 +1,7 @@
-import {useState} from "react";
-import {tempMovieData} from "../assets/TempMovieData.jsx";
 import Movie from "./Movie.jsx";
 
 
-export default function MovieList() {
-  const [movies, setMovies] = useState(tempMovieData);
+export default function MovieList({ movies }) {
 
   return (
     <ul className="list">
