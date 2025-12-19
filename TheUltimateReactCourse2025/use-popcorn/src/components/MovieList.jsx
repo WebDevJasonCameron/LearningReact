@@ -1,6 +1,5 @@
 import Movie from "./Movie.jsx";
 
-
 export default function MovieList({ movies }) {
 
   return (

@@ -1,12 +1,12 @@
 import ListBox from "./ListBox.jsx";
 import WatchedBox from "./WatchedBox.jsx";
+import MovieList from "./MovieList.jsx";
 
-export function Main({ movies }) {
+export function Main({ children }) {
 
   return (
     <main className="main">
-      <ListBox movies={movies} />
-      <WatchedBox />
+      { children }
     </main>
   )
 }
