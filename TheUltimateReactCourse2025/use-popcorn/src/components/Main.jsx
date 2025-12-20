@@ -1,4 +1,4 @@
-import ListBox from "./ListBox.jsx";
+import ListBox from "./Box.jsx";
 import WatchedBox from "./WatchedBox.jsx";
 import MovieList from "./MovieList.jsx";
 
