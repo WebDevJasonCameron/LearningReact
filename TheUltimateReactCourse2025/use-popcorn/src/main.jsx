@@ -6,6 +6,8 @@ import StarRating from "./components/StarRating.jsx";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
+    <StarRating maxRating={5}/>
+    <StarRating maxRating={10}/>
     <StarRating />
     {/*<App />*/}
   </StrictMode>,
