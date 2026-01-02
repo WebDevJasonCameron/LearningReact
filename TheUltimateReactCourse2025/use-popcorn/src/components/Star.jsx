@@ -8,7 +8,11 @@ export default function Star({ onRate, full }) {
   };
 
   return (
-    <span role="button" style={starStyle} onClick={onRate}>
+    <span role="button"
+          style={starStyle}
+          onClick={onRate}
+          onMouseEnter={() => console.log('Enter')}
+          onMouseLeave={() => console.log('Leave')} >
       {full?
         <svg
           xmlns="http://www.w3.org/2000/svg"
