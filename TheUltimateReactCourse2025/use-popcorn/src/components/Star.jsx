@@ -1,4 +1,4 @@
-export default function Star({ onRate, full }) {
+export default function Star({ onRate, full, onHoverIn, onHoverOut }) {
 
   const starStyle = {
     width: '48px',
@@ -11,8 +11,8 @@ export default function Star({ onRate, full }) {
     <span role="button"
           style={starStyle}
           onClick={onRate}
-          onMouseEnter={() => console.log('Enter')}
-          onMouseLeave={() => console.log('Leave')} >
+          onMouseEnter={onHoverIn}
+          onMouseLeave={onHoverOut}>
       {full?
         <svg
           xmlns="http://www.w3.org/2000/svg"
