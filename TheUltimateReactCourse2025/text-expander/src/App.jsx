@@ -1,4 +1,5 @@
 import "./styles.css";
+import TextExpander from "./comps/TextExpander";
 
 export default function App() {
   return (
@@ -32,8 +33,4 @@ export default function App() {
       </TextExpander>
     </div>
   );
-}
-
-function TextExpander() {
-  return <div>TODO</div>;
 }
