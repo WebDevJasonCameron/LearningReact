@@ -1,5 +1,3 @@
-import Tabbed from "./comps/Tabbed";
-
 const content = [
   {
     summary: "React is a library for building UIs",
@@ -17,12 +15,3 @@ const content = [
       "Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.",
   },
 ];
-
-export default function App() {
-  return (
-    <div>
-      <Tabbed content={content} />
-    </div>
-  );
-}
-
