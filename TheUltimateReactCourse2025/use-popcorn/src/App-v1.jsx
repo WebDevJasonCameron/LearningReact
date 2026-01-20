@@ -9,14 +9,12 @@ import Box from "./components/Box.jsx";
 import WatchedSummary from "./components/WatchedSummary.jsx";
 import WatchedMoviesList from "./components/WatchedMoviesList.jsx";
 import {tempWatchedData} from "./assets/TempWatchData.jsx";
-import {API} from "./assets/Keys.jsx";
+
 
 
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
-
-  fetch(`{API}`)
 
 
   return (
