@@ -1,6 +1,6 @@
 import NavBar from "./components/NavBar.jsx";
 import {Main} from "./components/Main.jsx";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {tempMovieData} from "./assets/TempMovieData.jsx";
 import NumResults from "./components/NumResults.jsx";
 import Search from "./components/Search.jsx";
@@ -16,7 +16,14 @@ export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
 
-  fetch(`{API}`)
+  useEffect(() => {
+    fetch(`http://www.omdbapi.com/?apikey=${API}&s=interstellar`)
+    .then(res => res.json())
+    .then(data => setMovies(data.Search));
+    }, []
+  );
+
+
 
 
   return (
