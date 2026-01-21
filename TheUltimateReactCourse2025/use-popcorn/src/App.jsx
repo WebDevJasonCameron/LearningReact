@@ -10,21 +10,26 @@ import WatchedSummary from "./components/WatchedSummary.jsx";
 import WatchedMoviesList from "./components/WatchedMoviesList.jsx";
 import {tempWatchedData} from "./assets/TempWatchData.jsx";
 import {API} from "./assets/Keys.jsx";
+import Loader from "./components/Loader.jsx";
 
 
 export default function App() {
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
+  const [isLoading, setIsLoading] = useState(false);
+  const query = "interstellar"
 
   useEffect(() => {
-    fetch(`http://www.omdbapi.com/?apikey=${API}&s=interstellar`)
-    .then(res => res.json())
-    .then(data => setMovies(data.Search));
+    async function fetchMovies() {
+      setIsLoading(true);
+      const res = await fetch(`http://www.omdbapi.com/?apikey=${API}&s=${query}`)
+      const data = await res.json();
+      setMovies(data.Search)
+      setIsLoading(false);
+    }
+    fetchMovies();
     }, []
   );
-
-
-
 
   return (
     <>
@@ -34,7 +39,7 @@ export default function App() {
       </NavBar>
       <Main>
         <Box>
-          <MovieList movies={ movies } />
+          {isLoading? <Loader /> : <MovieList movies={movies}/>}
         </Box>
         <Box>
           <WatchedSummary watched={watched} />
