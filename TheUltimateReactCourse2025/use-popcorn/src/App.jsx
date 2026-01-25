@@ -19,13 +19,14 @@ export default function App() {
   const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const query = "asdfasdfwqerasf2"
+  const [query, setQuery] = useState("");
+  const tempQuery = "interstellar"
 
   useEffect(() => {
     async function fetchMovies() {
       try {
         setIsLoading(true);
-        const res = await fetch(`http://www.omdbapi.com/?apikey=${API}&s=${query}`)
+        const res = await fetch(`http://www.omdbapi.com/?apikey=${API}&s=${tempQuery}`)
 
         if (!res.ok) throw new Error("Something went wrong with fetching movies")
 
@@ -46,7 +47,8 @@ export default function App() {
   return (
     <>
       <NavBar>
-        <Search />
+        <Search query={query}
+                setQuery={setQuery} />
         <NumResults movies={movies} />
       </NavBar>
       <Main>
