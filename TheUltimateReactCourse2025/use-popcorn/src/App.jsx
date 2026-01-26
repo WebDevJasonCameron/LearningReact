@@ -12,30 +12,41 @@ import {tempWatchedData} from "./assets/TempWatchData.jsx";
 import {API} from "./assets/Keys.jsx";
 import Loader from "./components/Loader.jsx";
 import ErrorMessage from "./components/ErrorMessage.jsx";
+import MovieDetails from "./components/MovieDetails.jsx";
 
 
 export default function App() {
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState(tempMovieData);
   const [watched, setWatched] = useState(tempWatchedData);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
-  const [query, setQuery] = useState("");
+  const [selectedId, setSelectedId] = useState(null);
+
+  function handleSelectMovie(id) {
+    setSelectedId((selectedId) => (id === selectedId ? null : id));
+  }
+
+  function handleCloseMovie() {
+    setSelectedId(null)
+  }
 
   useEffect(() => {
     async function fetchMovies() {
       try {
         setIsLoading(true);
         setError("");
-        const res = await fetch(`http://www.omdbapi.com/?apikey=${API}&s=${query}`)
+        const res = await fetch(`http://www.omdbapi.com/?apikey=${API}&s=${query}`);
 
-        if (!res.ok) throw new Error("Something went wrong with fetching movies")
+        if (!res.ok) throw new Error("Something went wrong with fetching movies");
 
         const data = await res.json();
-        if (data.Response === "False") throw new Error("No movies found")
+        if (data.Response === "False") throw new Error("No movies found");
 
-        setMovies(data.Search)
+        setMovies(data.Search);
+
       } catch (error) {
-        setError(error.message)
+        setError(error.message);
       } finally {
         setIsLoading(false);
       }
@@ -62,15 +73,22 @@ export default function App() {
             isLoading && <Loader />
           }
           {
-            !isLoading && !error && <MovieList movies={movies}/>
+            !isLoading && !error && <MovieList movies={movies}
+                                               onSelectMovie={ handleSelectMovie }/>
           }
           {
             error && <ErrorMessage message={error} />
           }
         </Box>
         <Box>
-          <WatchedSummary watched={watched} />
-          <WatchedMoviesList watched={watched} />
+          {
+            selectedId ? <MovieDetails selectedId={ selectedId }
+                                       onCloseMovie={ handleCloseMovie }/> :
+              <>
+                <WatchedSummary watched={watched} />
+                <WatchedMoviesList watched={watched} />
+              </>
+          }
         </Box>
       </Main>
     </>
