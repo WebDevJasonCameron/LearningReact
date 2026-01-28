@@ -12,14 +12,12 @@ export default function MovieDetails({ selectedId, onCloseMovie, onAddWatched })
 
   function handleAdd() {
     const newWatchedMovie = {
-      imdbRating: {
         imdbID: selectedId,
-        title,
-        year,
-        poster,
+        Title: title,
+        Year: year,
+        Poster: poster,
         imdbRating: Number(imdbRating),
         runtime: Number(runtime.split(" ").at(0)),
-      }
     }
 
     onAddWatched(newWatchedMovie);
