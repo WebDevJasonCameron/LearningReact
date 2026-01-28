@@ -17,8 +17,8 @@ import MovieDetails from "./components/MovieDetails.jsx";
 
 export default function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState(tempMovieData);
-  const [watched, setWatched] = useState(tempWatchedData);
+  const [movies, setMovies] = useState([]);
+  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
@@ -29,6 +29,10 @@ export default function App() {
 
   function handleCloseMovie() {
     setSelectedId(null)
+  }
+
+  function handleAddWatched(movie) {
+    setWatched((watched) => [...watched, movie]);
   }
 
   useEffect(() => {
@@ -83,7 +87,8 @@ export default function App() {
         <Box>
           {
             selectedId ? <MovieDetails selectedId={ selectedId }
-                                       onCloseMovie={ handleCloseMovie }/> :
+                                       onCloseMovie={ handleCloseMovie }
+                                       onAddWatched={handleAddWatched} /> :
               <>
                 <WatchedSummary watched={watched} />
                 <WatchedMoviesList watched={watched} />
