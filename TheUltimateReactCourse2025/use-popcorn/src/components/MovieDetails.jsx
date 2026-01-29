@@ -6,6 +6,7 @@ import Loader from "./Loader.jsx";
 export default function MovieDetails({ selectedId, onCloseMovie, onAddWatched }) {
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
+  const [userRating, setUserRating] = useState("");
 
 
   const {Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre} = movie;
@@ -21,6 +22,7 @@ export default function MovieDetails({ selectedId, onCloseMovie, onAddWatched })
     }
 
     onAddWatched(newWatchedMovie);
+    onCloseMovie();
   }
 
   useEffect(() => {
@@ -63,7 +65,9 @@ export default function MovieDetails({ selectedId, onCloseMovie, onAddWatched })
 
               <section>
                 <div className="rating">
-                  <StarRating maxRating={10} size={32} />
+                  <StarRating maxRating={10}
+                              size={32}
+                              onSetRating={setUserRating} />
 
                   <button className="btn-add"
                           onClick={ handleAdd } >
