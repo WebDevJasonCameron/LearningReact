@@ -3,11 +3,17 @@ import {API} from "../assets/Keys.jsx";
 import StarRating from "./StarRating.jsx";
 import Loader from "./Loader.jsx";
 
-export default function MovieDetails({ selectedId, onCloseMovie, onAddWatched }) {
+export default function MovieDetails({ selectedId,
+                                       onCloseMovie,
+                                       onAddWatched,
+                                       watched}) {
+
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState("");
 
+  const isWatched = watched.map(movie=>movie.imdbDB);
+  console.log(isWatched);
 
   const {Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre} = movie;
 
@@ -68,11 +74,14 @@ export default function MovieDetails({ selectedId, onCloseMovie, onAddWatched })
                   <StarRating maxRating={10}
                               size={32}
                               onSetRating={setUserRating} />
-
-                  <button className="btn-add"
-                          onClick={ handleAdd } >
-                    + Add to list
-                  </button>
+                  {
+                    userRating > 0 && (
+                      <button className="btn-add"
+                              onClick={ handleAdd } >
+                        + Add to list
+                      </button>
+                    )
+                  }
                 </div>
                 <p><em>{plot}</em></p>
                 <p>Starring {actors}</p>
