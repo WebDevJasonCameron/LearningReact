@@ -32,7 +32,9 @@ export default function App() {
   }
 
   function handleAddWatched(movie) {
-    setWatched((watched) => [...watched, movie]);
+    setWatched((watched) =>
+      watched.some((m) => m.imdbID === movie.imdbID) ? watched : [...watched, movie]
+    );
   }
 
   useEffect(() => {
