@@ -26,6 +26,7 @@ export default function MovieDetails({ selectedId,
         Poster: poster,
         imdbRating: Number(imdbRating),
         runtime: Number(runtime.split(" ").at(0)),
+        userRating,
     }
 
     onAddWatched(newWatchedMovie);
