@@ -8,6 +8,9 @@ export default function MovieDetails({ selectedId,
                                        onAddWatched,
                                        watched}) {
 
+  /**
+   * VARs
+   */
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [userRating, setUserRating] = useState(0);
@@ -18,6 +21,9 @@ export default function MovieDetails({ selectedId,
 
   const {Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre} = movie;
 
+  /**
+   * FUNs
+   */
   function handleAdd() {
     const newWatchedMovie = {
         imdbID: selectedId,
@@ -33,6 +39,9 @@ export default function MovieDetails({ selectedId,
     onCloseMovie();
   }
 
+  /**
+   * UEs
+   */
   useEffect(() => {
      async function getMovieDetails() {
        setIsLoading(true);
@@ -46,6 +55,15 @@ export default function MovieDetails({ selectedId,
      setIsLoading(false);
   }, [selectedId] );
 
+  useEffect(() => {
+    if(!title) return;
+    document.title = `Movie | ${title}`;
+  },
+    [title])
+
+  /**
+   * RET
+   */
   return (
       <div className="details">
         {
