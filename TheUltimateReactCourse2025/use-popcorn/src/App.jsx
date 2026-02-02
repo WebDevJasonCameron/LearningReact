@@ -23,6 +23,9 @@ export default function App() {
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
 
+  /**
+   * HANDs
+   */
   function handleSelectMovie(id) {
     setSelectedId((selectedId) => (id === selectedId ? null : id));
   }
@@ -41,12 +44,19 @@ export default function App() {
     setWatched((watched) => watched.filter(movie => movie.imdbID !== id))
   }
 
+  /**
+   * UEs
+   */
   useEffect(() => {
+    const controller = new AbortController();
+
     async function fetchMovies() {
       try {
         setIsLoading(true);
         setError("");
-        const res = await fetch(`http://www.omdbapi.com/?apikey=${API}&s=${query}`);
+        const res = await fetch(
+          `http://www.omdbapi.com/?apikey=${API}&s=${query}`,
+          { signal: controller.signal });
 
         if (!res.ok) throw new Error("Something went wrong with fetching movies");
 
@@ -56,7 +66,10 @@ export default function App() {
         setMovies(data.Search);
 
       } catch (error) {
-        setError(error.message);
+        if(error.name !== "AbortError"){
+          setError(error.message);
+        }
+
       } finally {
         setIsLoading(false);
       }
@@ -66,7 +79,12 @@ export default function App() {
         setError("")
       }
     }
+
     fetchMovies();
+
+    return () => {
+      controller.abort();
+    }
     }, [query]
   );
 
