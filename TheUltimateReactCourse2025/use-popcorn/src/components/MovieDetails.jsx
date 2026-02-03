@@ -42,6 +42,23 @@ export default function MovieDetails({ selectedId,
   /**
    * UEs
    */
+  useEffect(
+    function() {
+      function callback(e) {
+        if (e.code === "Escape") {
+          onCloseMovie();
+          console.log("close");
+        }
+      }
+
+      document.addEventListener("keydown", callback);
+
+      return () => {
+        document.removeEventListener("keydown", callback);
+      }
+    }
+  )
+
   useEffect(() => {
      async function getMovieDetails() {
        setIsLoading(true);
