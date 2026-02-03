@@ -65,6 +65,7 @@ export default function App() {
 
         setMovies(data.Search);
 
+        setError("");
       } catch (error) {
         if(error.name !== "AbortError"){
           setError(error.message);
