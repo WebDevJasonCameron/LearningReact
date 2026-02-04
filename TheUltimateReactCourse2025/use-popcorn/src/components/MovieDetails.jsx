@@ -47,7 +47,6 @@ export default function MovieDetails({ selectedId,
       function callback(e) {
         if (e.code === "Escape") {
           onCloseMovie();
-          console.log("close");
         }
       }
 
