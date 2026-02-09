@@ -1,12 +1,14 @@
 import NavBar from "./components/NavBar.jsx";
 import {Main} from "./components/Main.jsx";
 import {useEffect, useState} from "react";
+import {tempMovieData} from "./assets/TempMovieData.jsx";
 import NumResults from "./components/NumResults.jsx";
 import Search from "./components/Search.jsx";
 import MovieList from "./components/MovieList.jsx";
 import Box from "./components/Box.jsx";
 import WatchedSummary from "./components/WatchedSummary.jsx";
 import WatchedMoviesList from "./components/WatchedMoviesList.jsx";
+import {tempWatchedData} from "./assets/TempWatchData.jsx";
 import {API} from "./assets/Keys.jsx";
 import Loader from "./components/Loader.jsx";
 import ErrorMessage from "./components/ErrorMessage.jsx";
