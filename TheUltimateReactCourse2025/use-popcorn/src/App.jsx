@@ -20,10 +20,14 @@ export default function App() {
    */
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
-  const [watched, setWatched] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
   const [selectedId, setSelectedId] = useState(null);
+  const [watched, setWatched] = useState(() => {            // Pulls in the data from local storage
+    const storedValue = localStorage.getItem("watched");
+    return JSON.parse(storedValue);
+  });
+
 
   /**
    * HANDs
@@ -40,6 +44,7 @@ export default function App() {
     setWatched((watched) =>
       watched.some((m) => m.imdbID === movie.imdbID) ? watched : [...watched, movie]
     );
+
   }
 
   function handleDeleteWatched(id) {
@@ -49,6 +54,12 @@ export default function App() {
   /**
    * UEs
    */
+  useEffect(() => {                                               // Store into local memory0.````
+    localStorage.setItem('watched', JSON.stringify(watched))
+  }, [watched])
+
+
+
   useEffect(() => {
     const controller = new AbortController();
 
