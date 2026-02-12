@@ -1,4 +1,4 @@
-import {useEffect, useMemo, useState} from "react";
+import {useEffect, useMemo, useRef, useState} from "react";
 import {API} from "../assets/Keys.jsx";
 import StarRating from "./StarRating.jsx";
 import Loader from "./Loader.jsx";
@@ -13,12 +13,22 @@ export default function MovieDetails({ selectedId,
    */
   const [movie, setMovie] = useState({});
   const [isLoading, setIsLoading] = useState(false);
-  const [userRating, setUserRating] = useState(0);
+  const [userRating, setUserRating] = useState("");
 
+  /**
+   * REFs
+   */
+  const countRef = useRef(0);
+
+  /**
+   * VARs
+   */
   const isWatched = watched.some((m) => m.imdbID === selectedId);
-
   const watchedUserRating = watched.find(movie => movie.imdbID === selectedId)?.userRating;
 
+  /**
+   * OBJs
+   */
   const {Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre} = movie;
 
   /**
@@ -33,6 +43,7 @@ export default function MovieDetails({ selectedId,
         imdbRating: Number(imdbRating),
         runtime: Number(runtime.split(" ").at(0)),
         userRating,
+      countRatingDecisions: countRef.current,
     }
 
     onAddWatched(newWatchedMovie);
@@ -42,6 +53,10 @@ export default function MovieDetails({ selectedId,
   /**
    * UEs
    */
+  useEffect(() => {
+    if (userRating) countRef.current++;
+  }, [userRating]);
+
   useEffect(
     function() {
       function callback(e) {
