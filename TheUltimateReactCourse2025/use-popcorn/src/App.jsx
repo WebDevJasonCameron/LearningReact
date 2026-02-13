@@ -11,6 +11,7 @@ import Loader from "./components/Loader.jsx";
 import ErrorMessage from "./components/ErrorMessage.jsx";
 import MovieDetails from "./components/MovieDetails.jsx";
 import {useMovies} from "./customHook/useMovies.jsx";
+import {useLocalStorageState} from "./customHook/useLocalStorageState.jsx";
 
 
 export default function App() {
@@ -21,16 +22,12 @@ export default function App() {
   const [selectedId, setSelectedId] = useState(null);
   const [query, setQuery] = useState("");
 
-  const [watched, setWatched] = useState(() => {            // Pulls in the data from local storage
-    const storedValue = localStorage.getItem("watched");
-    return JSON.parse(storedValue);
-  });
-
 
   /**
    * CEs
    */
   const { movies, isLoading, error } = useMovies(query, handleCloseMovie);
+  const [ watched, setWatched ] = useLocalStorageState([], "watched");
 
   /**
    * HANDs
@@ -56,9 +53,6 @@ export default function App() {
   /**
    * UEs
    */
-  useEffect(() => {                                               // Store into local memory0.````
-    localStorage.setItem('watched', JSON.stringify(watched))
-  }, [watched])
 
 
 
