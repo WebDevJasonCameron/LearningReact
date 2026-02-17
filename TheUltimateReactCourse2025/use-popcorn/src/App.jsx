@@ -1,6 +1,6 @@
 import NavBar from "./components/NavBar.jsx";
 import {Main} from "./components/Main.jsx";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import NumResults from "./components/NumResults.jsx";
 import Search from "./components/Search.jsx";
 import MovieList from "./components/MovieList.jsx";
@@ -27,7 +27,7 @@ export default function App() {
    * CEs
    */
   const { movies, isLoading, error } = useMovies(query, handleCloseMovie);
-  const [ watched, setWatched ] = useLocalStorageState([], "watched");
+  const [ watched, setWatched ] = useLocalStorageState([]);
 
   /**
    * HANDs
@@ -49,11 +49,6 @@ export default function App() {
   function handleDeleteWatched(id) {
     setWatched((watched) => watched.filter(movie => movie.imdbID !== id))
   }
-
-  /**
-   * UEs
-   */
-
 
 
   return (

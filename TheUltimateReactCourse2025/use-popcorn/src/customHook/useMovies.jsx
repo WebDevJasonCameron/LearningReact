@@ -1,7 +1,6 @@
 import {useEffect, useState} from "react";
 import {API} from "../assets/Keys.jsx";
 
-
 export function useMovies(query, callback) {
   const [movies, setMovies] = useState([]);
   const [isLoading, setIsLoading] = useState(false);

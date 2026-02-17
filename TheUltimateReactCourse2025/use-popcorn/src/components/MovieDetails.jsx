@@ -1,7 +1,8 @@
-import {useEffect, useMemo, useRef, useState} from "react";
+import {useEffect, useRef, useState} from "react";
 import {API} from "../assets/Keys.jsx";
 import StarRating from "./StarRating.jsx";
 import Loader from "./Loader.jsx";
+import {useKey} from "../customHook/useKey.jsx";
 
 export default function MovieDetails({ selectedId,
                                        onCloseMovie,
@@ -29,7 +30,7 @@ export default function MovieDetails({ selectedId,
   /**
    * OBJs
    */
-  const {Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Released: released, Actors: actors, Director: director, Genre: genre} = movie;
+  const {Title: title, Year: year, Poster: poster, Runtime: runtime, imdbRating, Plot: plot, Actors: actors, Director: director, Genre: genre} = movie;
 
   /**
    * FUNs
@@ -57,22 +58,6 @@ export default function MovieDetails({ selectedId,
     if (userRating) countRef.current++;
   }, [userRating]);
 
-  useEffect(
-    function() {
-      function callback(e) {
-        if (e.code === "Escape") {
-          onCloseMovie();
-        }
-      }
-
-      document.addEventListener("keydown", callback);
-
-      return () => {
-        document.removeEventListener("keydown", callback);
-      }
-    }
-  )
-
   useEffect(() => {
      async function getMovieDetails() {
        setIsLoading(true);
@@ -95,6 +80,12 @@ export default function MovieDetails({ selectedId,
     }
   },
     [title])
+
+  /**
+   * CH
+   */
+  useKey("escape", onCloseMovie)
+
 
   /**
    * RET
