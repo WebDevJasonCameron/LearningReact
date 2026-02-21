@@ -1,12 +1,12 @@
-import './App.css'
+import './index.css'
+import DataCounter from "./DataCounter.jsx";
 
-function App() {
+export default function App() {
 
   return (
     <>
-      <h1>Hello</h1>
+      <DataCounter />
     </>
   )
 }
 
-export default App
