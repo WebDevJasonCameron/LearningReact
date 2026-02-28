@@ -6,6 +6,7 @@ import Loader from "./comps/Loader.jsx";
 import Error from "./comps/Error.jsx";
 import Start from "./comps/Start.jsx";
 import Question from "./comps/Question.jsx";
+import NextButton from "./comps/NextButton.jsx";
 
 const initialState = {
   questions: [],
@@ -44,6 +45,13 @@ function reducer(state, action) {
             ? state.points + question.points
             : state.points,
       } }
+    case "nextQuestion":
+      return {
+        ...state,
+        index: state.index + 1,
+        answer: null,
+      }
+
     default:
       throw new Error(`Unknown action type ${action.type}`);
   }
@@ -69,9 +77,15 @@ export default function App() {
         { status === "error" && <Error /> }
         { status === "ready" && <Start numQuestions={ numQuestions }
                                        dispatch={ dispatch } /> }
-        { status === "active" && <Question question={questions[index]}
-                                           dispatch={ dispatch }
-                                           answer={answer}/> }
+        { status === "active" &&
+          <>
+            <Question question={questions[index]}
+                      dispatch={ dispatch }
+                      answer={answer}/>
+            <NextButton dispatch={ dispatch }
+                        answer={answer} />
+          </>
+        }
 
       </Main>
 
