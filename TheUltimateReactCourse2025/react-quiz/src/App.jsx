@@ -9,6 +9,8 @@ import Question from "./comps/Question.jsx";
 import NextButton from "./comps/NextButton.jsx";
 import Progress from "./comps/Progress.jsx";
 import FinishScreen from "./comps/FinishScreen.jsx";
+import Footer from "./comps/Footer.jsx";
+
 
 const initialState = {
   questions: [],
@@ -18,6 +20,7 @@ const initialState = {
   answer: null,
   points: 0,
   highScore: 0,
+  secondsRemaining: null,
 };
 
 function reducer(state, action) {
@@ -27,6 +30,7 @@ function reducer(state, action) {
         ...state,
         questions: action.payload,
         status: "ready",
+        secondsRemaining: state.questions.length * 30,
       }
     case "dataFailed":
       return {
@@ -67,6 +71,13 @@ function reducer(state, action) {
         index: 0,
         answer: null,
         points: 0,
+        secondsRemaining: state.questions.length * 30,
+      }
+    case "tick":
+      return {
+        ...state,
+        secondsRemaining: state.secondsRemaining - 1,
+        status: state.secondsRemaining === 1 ? "finished" : state.status,
       }
 
     default:
@@ -75,7 +86,7 @@ function reducer(state, action) {
 }
 
 export default function App() {
-  const [{ questions, status, index, answer, points, highScore}, dispatch] = useReducer(reducer, initialState);
+  const [{ questions, status, index, answer, points, highScore, secondsRemaining}, dispatch] = useReducer(reducer, initialState);
 
   const numQuestions = questions?.length;
   const maxPossiblePoints = questions.reduce((prev, cur) => prev + cur.points, 0);
@@ -105,10 +116,13 @@ export default function App() {
             <Question question={questions[index]}
                       dispatch={ dispatch }
                       answer={answer}/>
-            <NextButton dispatch={ dispatch }
-                        answer={answer}
-                        index={ index }
-                        numQuestions={ numQuestions } />
+            <Footer secondsRemaining={ secondsRemaining }
+                    dispatch={ dispatch } >
+              <NextButton dispatch={ dispatch }
+                          answer={answer}
+                          index={ index }
+                          numQuestions={ numQuestions } />
+            </Footer>
           </>
         }
         {status === "finished" && <FinishScreen points={ points }
