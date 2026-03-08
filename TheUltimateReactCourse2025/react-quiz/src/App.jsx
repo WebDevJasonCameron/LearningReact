@@ -11,6 +11,8 @@ import Progress from "./comps/Progress.jsx";
 import FinishScreen from "./comps/FinishScreen.jsx";
 import Footer from "./comps/Footer.jsx";
 
+const SECS_PER_QUESTION = 30;
+
 
 const initialState = {
   questions: [],
@@ -30,7 +32,7 @@ function reducer(state, action) {
         ...state,
         questions: action.payload,
         status: "ready",
-        secondsRemaining: state.questions.length * 30,
+        secondsRemaining: state.questions.length * SECS_PER_QUESTION,
       }
     case "dataFailed":
       return {
@@ -71,7 +73,7 @@ function reducer(state, action) {
         index: 0,
         answer: null,
         points: 0,
-        secondsRemaining: state.questions.length * 30,
+        secondsRemaining: state.questions.length * SECS_PER_QUESTION,
       }
     case "tick":
       return {
