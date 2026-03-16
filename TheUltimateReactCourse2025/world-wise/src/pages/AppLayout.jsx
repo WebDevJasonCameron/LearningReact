@@ -1,11 +1,11 @@
-import PageNotFound from "./PageNotFound.jsx";
-import PageNav from "../components/PageNav.jsx";
+import Sidebar from "../components/Sidebar.jsx";
+import MapApp from "../components/MapApp.jsx";
 
 export default function AppLayout() {
   return (
-    <>
-      <h1>App Layout</h1>
-      <PageNav />
-    </>
+    <div>
+      <Sidebar />
+      <MapApp />
+    </div>
   )
 }
