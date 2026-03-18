@@ -1,11 +1,12 @@
 import Sidebar from "../components/Sidebar.jsx";
-import MapApp from "../components/MapApp.jsx";
+import Map from "../components/Map.jsx";
+import styles from "./AppLayout.module.css";
 
 export default function AppLayout() {
   return (
-    <div>
+    <div className={styles.app} >
       <Sidebar />
-      <MapApp />
+      <Map />
     </div>
   )
 }
