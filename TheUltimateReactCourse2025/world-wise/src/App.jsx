@@ -1,5 +1,8 @@
+import { useEffect, useState } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { CountryList } from "./components/CountryList.jsx";
+
 import './App.css'
-import {BrowserRouter, Routes, Route} from "react-router-dom";
 import Product from "./pages/Product.jsx";
 import Pricing from "./pages/Pricing.jsx";
 import Homepage from "./pages/Homepage.jsx";
@@ -7,7 +10,6 @@ import PageNotFound from "./pages/PageNotFound.jsx";
 import Login from "./pages/Login.jsx";
 import AppLayout from "./pages/AppLayout.jsx";
 import CityList from "./components/CityList.jsx";
-import {useEffect, useState} from "react";
 
 const BASE_URL = "http://localhost:8000"
 
@@ -46,11 +48,12 @@ function App() {
                  element={ <Login /> } />
           <Route path="app"
                  element={ <AppLayout /> }  >
-            <Route index element={ <CityList cities={cities}
-                                             isLoading={isLoading} /> } />
-            <Route path="cities" element={ <CityList cities={cities}
-                                                     isLoading={isLoading}/> } />
-            <Route path="countries" element={<p>Countries</p>} />
+            <Route index element={ <CityList cities={ cities }
+                                             isLoading={ isLoading } /> } />
+            <Route path="cities" element={ <CityList cities={ cities }
+                                                     isLoading={ isLoading }/> } />
+            <Route path="countries" element={ <CountryList cities={ cities }
+                                                           isLoading={ isLoading } />} />
             <Route path="form" element={<p>Form</p>} />
           </Route>
           <Route path="*"
