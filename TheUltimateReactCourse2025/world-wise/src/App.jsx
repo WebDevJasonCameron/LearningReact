@@ -10,6 +10,7 @@ import PageNotFound from "./pages/PageNotFound.jsx";
 import Login from "./pages/Login.jsx";
 import AppLayout from "./pages/AppLayout.jsx";
 import CityList from "./components/CityList.jsx";
+import City from "./components/City.jsx";
 
 const BASE_URL = "http://localhost:8000"
 
@@ -48,10 +49,13 @@ function App() {
                  element={ <Login /> } />
           <Route path="app"
                  element={ <AppLayout /> }  >
+
             <Route index element={ <CityList cities={ cities }
                                              isLoading={ isLoading } /> } />
             <Route path="cities" element={ <CityList cities={ cities }
                                                      isLoading={ isLoading }/> } />
+            <Route path="cities/:id" element={ <City /> } />
+
             <Route path="countries" element={ <CountryList cities={ cities }
                                                            isLoading={ isLoading } />} />
             <Route path="form" element={<p>Form</p>} />
