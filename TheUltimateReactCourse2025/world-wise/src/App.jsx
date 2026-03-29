@@ -11,6 +11,7 @@ import Login from "./pages/Login.jsx";
 import AppLayout from "./pages/AppLayout.jsx";
 import CityList from "./components/CityList.jsx";
 import City from "./components/City.jsx";
+import Form from "./components/Form.jsx";
 
 const BASE_URL = "http://localhost:8000"
 
@@ -58,7 +59,7 @@ function App() {
 
             <Route path="countries" element={ <CountryList cities={ cities }
                                                            isLoading={ isLoading } />} />
-            <Route path="form" element={<p>Form</p>} />
+            <Route path="form" element={<Form />} />
           </Route>
           <Route path="*"
                  element={ <PageNotFound /> }  />
